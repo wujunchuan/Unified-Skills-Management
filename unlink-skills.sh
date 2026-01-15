@@ -13,7 +13,7 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 # Central skills directory
-SKILLS_DIR="$HOME/skills"
+SKILLS_DIR="$HOME/skills/.skills"
 
 # Agent configurations: "agent_name:target_path"
 # Must match the AGENTS array in link-skills.sh

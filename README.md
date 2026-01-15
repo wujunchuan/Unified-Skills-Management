@@ -32,10 +32,10 @@ chmod +x ~/skills/unlink-skills.sh
 
 ```bash
 # 创建 skill 目录
-mkdir -p ~/skills/my-new-skill
+mkdir -p ~/skills/.skills/my-new-skill
 
 # 创建 SKILL.md（必需）
-cat > ~/skills/my-new-skill/SKILL.md << 'EOF'
+cat > ~/skills/.skills/my-new-skill/SKILL.md << 'EOF'
 ---
 name: My New Skill
 description: A brief description of what this skill does
@@ -61,16 +61,16 @@ EOF
 
 ```bash
 # 创建完整的 skill 结构
-mkdir -p ~/skills/advanced-skill/{scripts,examples,resources}
+mkdir -p ~/skills/.skills/advanced-skill/{scripts,examples,resources}
 
 # 创建 SKILL.md
-touch ~/skills/advanced-skill/SKILL.md
+touch ~/skills/.skills/advanced-skill/SKILL.md
 
 # 添加辅助脚本
-touch ~/skills/advanced-skill/scripts/helper.sh
+touch ~/skills/.skills/advanced-skill/scripts/helper.sh
 
 # 添加示例文件
-touch ~/skills/advanced-skill/examples/example.md
+touch ~/skills/.skills/advanced-skill/examples/example.md
 
 # 链接到所有 agents
 ~/skills/link-skills.sh
@@ -83,13 +83,15 @@ touch ~/skills/advanced-skill/examples/example.md
 ├── README.md                    # 本文档
 ├── link-skills.sh              # 自动链接脚本
 ├── unlink-skills.sh            # 自动解除链接脚本
-├── code-review/                # 示例 skill
-│   ├── SKILL.md               # 必需：主要说明文件
-│   ├── scripts/               # 可选：辅助脚本
-│   ├── examples/              # 可选：示例代码
-│   └── resources/             # 可选：其他资源
-└── deployment/
-    └── SKILL.md
+├── .gitignore                  # Git 忽略配置
+└── .skills/                    # 技能存储目录（已加入 .gitignore）
+    ├── code-review/            # 示例 skill
+    │   ├── SKILL.md           # 必需：主要说明文件
+    │   ├── scripts/           # 可选：辅助脚本
+    │   ├── examples/          # 可选：示例代码
+    │   └── resources/         # 可选：其他资源
+    └── deployment/
+        └── SKILL.md
 ```
 
 ## SKILL.md 格式规范
@@ -132,7 +134,7 @@ git push -u origin main
 
 ```bash
 # 编辑 skill
-vim ~/skills/code-review/SKILL.md
+vim ~/skills/.skills/code-review/SKILL.md
 
 # 无需重新链接，所有 Agent 立即生效
 ```
@@ -151,7 +153,7 @@ find ~/.gemini/antigravity/skills/ -type l -ls
 
 ```bash
 # 方法 1: 从中心目录删除
-rm -rf ~/skills/unwanted-skill
+rm -rf ~/skills/.skills/unwanted-skill
 
 # 重新运行链接脚本清理死链接
 ~/skills/link-skills.sh
@@ -169,7 +171,7 @@ rm -rf ~/skills/unwanted-skill
 npx add-skill <skill-name> --path /tmp/temp-skill
 
 # 移动到统一管理目录
-mv /tmp/temp-skill ~/skills/<skill-name>
+mv /tmp/temp-skill ~/skills/.skills/<skill-name>
 
 # 链接到所有 agents
 ~/skills/link-skills.sh
@@ -193,7 +195,7 @@ mv /tmp/temp-skill ~/skills/<skill-name>
 
 ```bash
 # 确保 skills 目录可读
-chmod -R 755 ~/skills
+chmod -R 755 ~/skills/.skills
 ```
 
 ## 贡献

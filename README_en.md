@@ -32,10 +32,10 @@ chmod +x ~/skills/unlink-skills.sh
 
 ```bash
 # Create skill directory
-mkdir -p ~/skills/my-new-skill
+mkdir -p ~/skills/.skills/my-new-skill
 
 # Create SKILL.md (required)
-cat > ~/skills/my-new-skill/SKILL.md << 'EOF'
+cat > ~/skills/.skills/my-new-skill/SKILL.md << 'EOF'
 ---
 name: My New Skill
 description: A brief description of what this skill does
@@ -61,16 +61,16 @@ EOF
 
 ```bash
 # Create complete skill structure
-mkdir -p ~/skills/advanced-skill/{scripts,examples,resources}
+mkdir -p ~/skills/.skills/advanced-skill/{scripts,examples,resources}
 
 # Create SKILL.md
-touch ~/skills/advanced-skill/SKILL.md
+touch ~/skills/.skills/advanced-skill/SKILL.md
 
 # Add helper scripts
-touch ~/skills/advanced-skill/scripts/helper.sh
+touch ~/skills/.skills/advanced-skill/scripts/helper.sh
 
 # Add example files
-touch ~/skills/advanced-skill/examples/example.md
+touch ~/skills/.skills/advanced-skill/examples/example.md
 
 # Link to all agents
 ~/skills/link-skills.sh
@@ -83,13 +83,15 @@ touch ~/skills/advanced-skill/examples/example.md
 ├── README.md                    # This document
 ├── link-skills.sh              # Auto-link script
 ├── unlink-skills.sh            # Auto-unlink script
-├── code-review/                # Example skill
-│   ├── SKILL.md               # Required: Main documentation
-│   ├── scripts/               # Optional: Helper scripts
-│   ├── examples/              # Optional: Example code
-│   └── resources/             # Optional: Other resources
-└── deployment/
-    └── SKILL.md
+├── .gitignore                  # Git ignore configuration
+└── .skills/                    # Skills storage directory (ignored by git)
+    ├── code-review/            # Example skill
+    │   ├── SKILL.md           # Required: Main documentation
+    │   ├── scripts/           # Optional: Helper scripts
+    │   ├── examples/          # Optional: Example code
+    │   └── resources/         # Optional: Other resources
+    └── deployment/
+        └── SKILL.md
 ```
 
 ## SKILL.md Format Specification
@@ -132,7 +134,7 @@ After modifying any skill, all agents will automatically see the updates (becaus
 
 ```bash
 # Edit skill
-vim ~/skills/code-review/SKILL.md
+vim ~/skills/.skills/code-review/SKILL.md
 
 # No need to re-link, changes take effect immediately for all agents
 ```
@@ -151,7 +153,7 @@ find ~/.gemini/antigravity/skills/ -type l -ls
 
 ```bash
 # Method 1: Delete from central directory
-rm -rf ~/skills/unwanted-skill
+rm -rf ~/skills/.skills/unwanted-skill
 
 # Re-run link script to clean up dead links
 ~/skills/link-skills.sh
@@ -169,7 +171,7 @@ While `add-skill` doesn't directly support Gemini, you can use it like this:
 npx add-skill <skill-name> --path /tmp/temp-skill
 
 # Move to unified management directory
-mv /tmp/temp-skill ~/skills/<skill-name>
+mv /tmp/temp-skill ~/skills/.skills/<skill-name>
 
 # Link to all agents
 ~/skills/link-skills.sh
@@ -193,7 +195,7 @@ If you've moved the `~/skills` directory, you need to recreate the links:
 
 ```bash
 # Ensure skills directory is readable
-chmod -R 755 ~/skills
+chmod -R 755 ~/skills/.skills
 ```
 
 ## Contributing

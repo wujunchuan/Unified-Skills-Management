@@ -1,0 +1,4 @@
+# Skills directory - contains all skill implementations
+# Ignore all contents in .skills except .gitkeep
+.skills/*
+!.skills/.gitkeep
