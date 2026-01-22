@@ -20,7 +20,7 @@ AGENTS=(
     "cursor:$HOME/.cursor/skills"
     "claude:$HOME/.claude/skills"
     "copilot:$HOME/.copilot/skills"
-    "opencode:$HOME/.config/opencode/skill"
+    "opencode:$HOME/.config/opencode/skills"
     "codex:$HOME/.codex/skills"
     "gemini-cli:$HOME/.gemini/skills"
     "windsurf:$HOME/.codeium/windsurf/skills"
